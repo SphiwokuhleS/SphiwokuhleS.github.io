@@ -1,7 +1,7 @@
 # Site settings
 title: Sp3kt0rZ Blog # site title
 description: >- # site description
-  I'll be posting my writeups on HackTheBox or anything else i find interesting...
+  I'll be posting my writeups on HackTheBox or anything else i find interesting.
 lang: en-US # default lang
 timezone: GMT+2 # set your timezone
 image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
@@ -15,7 +15,7 @@ author: sp3kt0r
     A autodidact programmer and ethical hacker who enjoys writing code that breaks into computer systems,
 passionate about technology and believes his learning journey shall never end, my goal is to become a red or blue teamer
   username:  # author username
-  github: SphiwokuhleS
+  github: https://github.com/SphiwokuhleS/
   twitter: sp3kt0r3
   facebook: 
   email: sphiwokuhleshandu24@gmail.com # your contact adress
