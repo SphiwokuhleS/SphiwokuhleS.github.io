@@ -1,4 +1,14 @@
-- name: leonids
-  descr: "Bacon ipsum dolor sit amet doner meatball jowl short ribs, chicken prosciutto salami frankfurter. Pig drumstick turducken short ribs, brisket meatloaf ham hock shankle andouille corned beef strip steak. Venison ham bresaola strip steak. Pork belly ribeye prosciutto t-bone."
-  image: pong.png
+- name: Network Scanner
+  descr: "I built a simple network scanner to see how packets are created and manipulated with scapy, i also used http://macvendors.co/api to query mac address prefix's to determine the vendor of the device"
+  image: 
   github: https://github.com/renyuanz/leonids
+
+- name: Key Logger
+  descr: "A very basic keylogger that sends the logs to a desired email address"
+  image: 
+  github: https://github.com/SphiwokuhleS/sp3_keylogger
+
+- name: Arp Spoofer
+  descr: "I also built this to explore with packet manipulation, it was quite fun seeing it work"
+  image: 
+  github: https://github.com/SphiwokuhleS/sp3_arpspoofer
